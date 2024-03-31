@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('../../content/images/Contact.png');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs"><span class="mr-2"><a href="~/Home">Trang Chủ <i class="ion-ios-arrow-forward"></i></a></span> <span>Liên hệ <i class="ion-ios-arrow-forward"></i></span></p>
+                <h1 class="mb-3 bread">Liên lạc với chúng tôi</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section contact-section">
+    <div class="container">
+        <div class="row d-flex mb-5 contact-info">
+            <div class="col-md-4">
+                @{ Html.RenderAction("Contact_Info", "Contact");}
+            </div>
+            <div class="col-md-8 block-9 mb-md-5">
+                <div class="bg-light p-5 contact-form">
+                    <div class="form-group">
+                        <input id="input_name" type="text" class="form-control" value="" placeholder="Họ tên" " required="required" data-error="Vui lòng nhập tên.">
+                    </div>
+                    <div class="form-group">
+                        <input id="input_email" type="email" name="email" class="form-control" value="" placeholder="Email của bạn" required="required" data-error="Vui lòng nhập email.">
+                    </div>
+                    <div class="form-group">
+                        <input id="input_phone" name="phone" type="text" class="form-control" value="" placeholder="SĐT" required="required" data-error="Vui lòng nhập SĐT.">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="massage" id="input_message" cols="30" rows="7" class="form-control" value="" placeholder="Nội dung" required data-error="Vui lòng nhập nội dung."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button id="review_submit" type="submit" class="btn btn-primary py-3 px-5" value="Submit">Gửi</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.420594936113!2d106.78252241152533!3d10.855580057682204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175276e7ea103df%3A0xb6cf10bb7d719327!2sHUTECH%20University%20-%20E%20Campus%20(SHTP)!5e0!3m2!1sfr!2s!4v1684063533169!5m2!1sfr!2s" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>            </div>
+        </div>
+    </div>
+</section>
+
+@section script{
+    <script src="~/Content/js/jquery-ui.js"></script>
+    <script src="~/Content/js/contact_custom.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#review_submit").click(function () {
+                if ($("#input_name").val() != "" && $("#input_phone").val() != "" && $("#input_email").val() != "" && $("#input_message").val() != "") {
+                    _name = $("#input_name").val();
+                    _phone = $("#input_phone").val();
+                    _email = $("#input_email").val();
+                    _message = $("#input_message").val();
+                    $.ajax({
+                        type: "POST",
+                        url: "/contact/create",
+                        data: { name: _name, phone: _phone, email: _email, message: _message },
+                        cache: false,
+                        success: function (data) {
+                            if (data.status) {
+                                alert("Bạn đã gửi thư thành công");
+                            }
+                            else {
+                                alert("Bạn đã gửi thư không thành công");
+                            }
+                        }
+                    });
+                } else {
+                    alert("Vui lòng nhập đầy đủ thông tin!!");
+                }
+
+            })
+
+        })
+    </script>
+}

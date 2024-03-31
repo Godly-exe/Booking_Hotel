@@ -1,0 +1,104 @@
+﻿
+@{
+    var giohang = Session["giohang"] as List<Booking_Hotel.Models.CartItem>;
+}
+@{
+    ViewBag.Title = "Đơn hàng của bạn";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<style>
+    body {
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+    }
+</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin người nhận</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+
+<body>
+    @if (giohang == null || giohang.Count == 0)
+    {
+        <h2 class="text-light text-center" style="padding-top:50px">
+            Đơn hàng của bạn đang rỗng!
+        </h2>
+    }
+    else
+    {
+        <div class="tab-pane py-5 py-xl-10 fade active show" id="wizard1" role="tabpanel" aria-labelledby="wizard1-tab">
+            <div class="row justify-content-center">
+                <div class="col-xxl-6 col-xl-8" style="width:80%; background-color:white;padding: 10px;border-radius:10px">
+                    <h3 class="text-primary">Thuê phòng ngay</h3>
+                    <h5 class="card-title mb-4">Vui lòng điền thông tin của bạn</h5>
+
+                    @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
+                    {
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputUsername">Họ và tên</label>
+                            <input class="form-control" name="inputUsername" type="text" placeholder="Họ tên của bạn..." required>
+                        </div>
+                        <div class="row gx-3">
+                            <div class="mb-3 col-md-6">
+                                <label class="small mb-1">Số điện thoại</label>
+                                <input class="form-control" name="inputPhone" type="text" placeholder="SĐT" required>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label class="small mb-1">Email</label>
+                                <input class="form-control" name="inputEmail" type="email" placeholder="Email ....." required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1">Ghi chú</label>
+                            <textarea class="form-control" name="inputNote" placeholder="Ghi chú thêm nếu có" value="null"></textarea>
+                        </div>
+                        foreach (var item in giohang)
+                        {
+                            <div class="row gx-3">
+                                <div class="col-md-6 mb-md-0">
+                                    <label class="small mb-1" for="inputPhone">Tên phòng</label>
+                                    <input class="form-control" id="inputPhone" type="text" disabled placeholder="@item.name">
+                                </div>
+                                <div class="col-md-6 mb-0">
+                                    <label class="small mb-1" for="inputBirthday">Số tiền</label>
+                                    <input class="form-control" id="inputBirthday" type="text" disabled value="@item.price">
+                                </div>
+                            </div>
+
+                        }
+                        <hr class="my-4">
+                        <div class="form-group">
+                            s
+                            @if (Model.IsActive == true)
+                            {
+                                <input class="custom-checkbox" style="width:30px;height:20px;margin-left:10px" type="checkbox" checked name="IsActive" value="true">
+                            }
+                            else
+                            {
+                                <input class="custom-checkbox" style="width:30px;height:20px;margin-left:10px" type="checkbox" id="customCheckbox2" name="IsActive" value="true">
+                            }
+                            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <a href="~/Cart" class="btn btn-light ">Về đơn hàng</a>
+                            <button id="checkoutBtn" class="btn btn-primary" onclick="return confirm('Xác nhận?')" type="submit">Xác nhận</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    }
+</body>
+
+</html>
+
+

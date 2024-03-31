@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <title>Booking Hotel</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/Content/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/css/animate.css">
+
+    <link rel="stylesheet" href="~/Content/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Content/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/Content/css/aos.css">
+
+    <link rel="stylesheet" href="~/Content/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="~/Content/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/Content/css/jquery.timepicker.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link href="~/Content/css/css_out.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/css/flaticon.css">
+    <link rel="stylesheet" href="~/Content/css/icomoon.css">
+    <link rel="stylesheet" href="~/Content/css/style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="~/Home">Hotel  <span> Hub</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    @Html.Action("Menu", "Home")
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END nav -->
+    @RenderBody();
+    <a href="~/Cart" class="popup-vimeo">
+        <i class="fas fa-luggage-cart fa-4x" style="color:rgb(75, 23, 18);position:fixed;bottom:30px;height: 100px;right: 30px;z-index:9999;"> </i>
+    </a>
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2"><a href="#" class="logo">Hotel<span> Hub</span></a></h2>
+                        <p>Đặt phòng với giá hợp lý.</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+
+                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4 ml-md-5">
+                        <h2 class="ftco-heading-2">Thông tin</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="~/About" class="py-2 d-block">Giới thiệu</a></li>
+                            <li><a href="~/Blog" class="py-2 d-block">Bài viết</a></li>
+                            <li><a href="@Url.Action("DkDv","Home")" class="py-2 d-block">Điều khoản và dịch vụ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Hỗ trợ khách hàng</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block">Thành viên nhóm</a></li>
+                            <li><a href="@Url.Action("faqs","Home")" class="py-2 d-block">FAQs</a></li>
+                            <li><a href="~/Contact" class="py-2 d-block">Liên hệ với chúng tôi</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Liên Hệ</h2>
+                        <div class="block-23 mb-3">
+                            @{ Html.RenderAction("Layout_Contact", "Home");}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
+
+
+    <script src="~/Content/js/jquery.min.js"></script>
+    <script src="~/Content/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/Content/js/popper.min.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/jquery.easing.1.3.js"></script>
+    <script src="~/Content/js/jquery.waypoints.min.js"></script>
+    <script src="~/Content/js/jquery.stellar.min.js"></script>
+    <script src="~/Content/js/owl.carousel.min.js"></script>
+    <script src="~/Content/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/js/aos.js"></script>
+    <script src="~/Content/js/jquery.animateNumber.min.js"></script>
+    <script src="~/Content/js/bootstrap-datepicker.js"></script>
+    <script src="~/Content/js/jquery.timepicker.min.js"></script>
+    <script src="~/Content/js/scrollax.min.js"></script>
+    <script src="~/Content/js/main.js"></script>
+    @RenderSection("script", required: false)
+</body>
+</html>

@@ -1,0 +1,178 @@
+﻿@model Booking_Hotel.Models.data.room
+@{
+    ViewBag.Title = "Room_Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('../../content/images/room.png');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs"><span class="mr-2"><a href="~/Home">Trang chủ <i class="ion-ios-arrow-forward"></i></a></span> <span>Phòng <i class="ion-ios-arrow-forward"></i></span></p>
+                <h1 class="mb-3 bread">Chi tiết phòng</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ftco-section ftco-car-details">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="car-details">
+                    <div class="img rounded" style="background-image: url(@Model.image);"></div>
+                    <div class="text text-center">
+                        <span class="subheading">@Model.types.type1</span>
+                        <h2>@Model.name</h2>
+                        <a href="@Url.Action("AddCart", "Cart", new {id = Model.id_room})" class="btn btn-primary py-2 mr-1">Thêm vào giỏ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services">
+                    <div class="media-body py-md-4">
+                        <div class="d-flex mb-3 align-items-center">
+                            <div class="icon d-flex align-items-center justify-content-center">
+                                <span class="fas fa-bed"></span>
+                            </div>
+                            <div class="text">
+                                <h3 class="heading mb-0 pl-3">
+                                    Giường
+                                    <span>@Model.bed</span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services">
+                    <div class="media-body py-md-4">
+                        <div class="d-flex mb-3 align-items-center">
+                            <div class="icon d-flex align-items-center justify-content-center">
+                                <span class="fas fa-ruler-horizontal"></span>
+                            </div>
+                            <div class="text">
+                                <h3 class="heading mb-0 pl-3">
+                                    Kích thước
+                                    <span>@Model.size cm</span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services">
+                    <div class="media-body py-md-4">
+                        <div class="d-flex mb-3 align-items-center">
+                            <div class="icon d-flex align-items-center justify-content-center">
+                                <span class="far fa-eye"></span>
+                            </div>
+                            <div class="text">
+                                <h3 class="heading mb-0 pl-3">
+                                    Hướng nhìn
+                                    <span>@Model.view_room</span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 ftco-animate">
+
+            <div class="about-author d-flex p-4 bg-light">
+                <div class="bio mr-5">
+                    <img src="~/Content/images/admin.png" alt="Admin" class="img-fluid mb-4">
+                </div>
+                <div class="desc">
+                    <h3>Admin</h3>
+                    <p>
+                        Đội ngũ Admin luôn nỗ lực, tìm hiểu, xác minh thông tin để đưa đến cho bạn đọc những bài viết
+                        chất lượng nhất. Cảm ơn bạn đã chú ý theo dõi !!!
+                    </p>
+                </div>
+            </div>
+            <div class="pt-5 mt-5" id="binhluan">
+                @{ Html.RenderAction("CommentRoom", new { id = Model.id_room });}
+                <div class="comment-form-wrap pt-5">
+                    <h3 class="mb-5">Bình luận</h3>
+                    <form class="p-5 bg-light">
+                        <h1>Đánh giá sản phẩm</h1>
+                        
+                        <div class="form-group">
+                            <label for="name">Tên *</label>
+                            <input type="text" class="form-control" value="" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea name="massage" id="message" value="" cols="10" rows="10" class="form-control" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" id="addComment" value="Bình luận" class="btn py-3 px-4 btn-primary">Bình luận</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 pills">
+                <div class="bd-example bd-example-tabs">
+                    <div class="d-flex justify-content-center">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-manufacturer-tab" data-toggle="pill" href="#pills-manufacturer" role="tab" aria-controls="pills-manufacturer" aria-expanded="true">Mô tả</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
+
+                            <p>@Html.Raw(Model.describe)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+@section script{
+    <script src="~/Content/js/jquery-ui.js"></script>
+    <script src="~/Content/js/contact_custom.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#addComment").click(function () {
+                if ($("#name").val() != "" && $("#message").val() != "") {
+                    _id = @Model.id_room;
+                    _name = $("#name").val();
+                    _message = $("#message").val();
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("AddCommentRoom", "Rooms")",
+                        data: { id: _id, name: _name, content: _message },
+                        success: function (data) {
+                            if (data.status) {
+                                window.location.reload();
+                            }
+                        }
+                    });
+                } else {
+                    alert("Vui lòng nhập thông tin!!");
+                }
+
+
+            })
+
+        })
+    </script>
+
+
+}

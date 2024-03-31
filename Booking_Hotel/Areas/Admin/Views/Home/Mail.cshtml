@@ -1,0 +1,35 @@
+﻿
+@model Booking_Hotel.Models.data.mail
+@{
+    ViewBag.Title = "Mail";
+    Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
+}
+
+<div class="row" style="display: inherit;">
+    <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary ">Chi tiết thư</h6>
+        </div>
+        <!-- Card Body -->
+        <div style=" margin: 1.2rem;font-size:22px">
+            <strong>Tên: </strong>@Model.Name <hr />
+            <strong>SĐT: </strong>@Model.Phone <hr />
+            <strong>Email: </strong>@Model.Email <hr />
+            @Model.Message<br /><small>Ngày gửi: @Model.CreatedDate</small><hr />
+            <a href="mailto:@Model.Email" class="btn btn-info btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-info-circle"></i>
+                </span>
+                <span class="text">Trả lời</span>
+            </a>
+            <a href="@Url.Action("AllMail","Home")" class="btn btn-light btn-icon-split">
+                <span class="icon text-gray-600">
+                    <i class="fas fa-arrow-right"></i>
+                </span>
+                <span class="text">Toàn bộ thư</span>
+            </a>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,54 @@
+﻿@model PagedList.IPagedList<Booking_Hotel.Models.data.blog>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+}<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('../Content/images/blog/blog.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs"><span class="mr-2"><a href="~/Home">Trang chủ <i class="ion-ios-arrow-forward"></i></a></span> <span>Bài viết <i class="ion-ios-arrow-forward"></i></span></p>
+                <h1 class="mb-3 bread">Bài viết của chúng tôi</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-12 text-center d-flex ftco-animate">
+                    <div class="blog-entry justify-content-end mb-md-5">
+                        <a href="~/Blog/Blog_detail?idbv=@item.id" class="block-20 img" style="background-image: url('@item.image');">
+                        </a>
+                        <div class="text px-md-5 pt-4">
+                            <div class="meta mb-3">
+                                <div><a href="">@item.date</a></div>
+                                <div><a href="#">Admin</a></div>
+                            </div>
+                            <h3 class="heading mt-2"><a href="~/Blog/Blog_detail?idbv=@item.id">@item.title</a></h3>
+                            <p>@item.head</p>
+                            <p>@Html.ActionLink("Đọc tiếp...", "Blog_detail", new { idbv = item.id }, new { @class = "btn btn-primary" }) <span class="icon-long-arrow-right"></span></p>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+        <div class="row mt-5">
+            <div class="col text-center">
+                <div class="block-27">
+                    <ul>
+                        <li>
+                            @Html.PagedListPager(Model, pageNumber => Url.Action("Index",
+                                            new { pageNumber }))
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

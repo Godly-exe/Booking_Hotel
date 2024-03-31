@@ -1,0 +1,28 @@
+﻿
+.timkiem{
+    float: left;
+    width: 30vw;
+    height: 56.5px;
+    font-size: 18px;
+    border: 2px solid rgb(1, 210, 142);
+    padding: 2px 15px;
+    margin-inline-end: 10px;
+    border-radius: 10px;
+}
+div.timkiemm {
+    margin-bottom: 20px;
+}
+.sanglap {
+    font-size: 16px;
+}
+.luachon {
+    float: left;
+    width: 10vw;
+    height: 56.5px;
+    font-size: 18px;
+    border: 2px solid rgb(1, 210, 142);
+    padding: 2px 15px;
+    color:red;
+    margin-inline-end: 10px;
+    border-radius: 10px;
+}

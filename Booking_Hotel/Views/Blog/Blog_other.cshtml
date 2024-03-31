@@ -1,0 +1,15 @@
+﻿
+@foreach (var item in Model)
+{
+    <div class="block-21 mb-4 d-flex">
+        <a class="blog-img mr-4" style="background-image: url(@item.image);"></a>
+        <div class="text">
+            <h3 class="heading"><a href="Blog_detail?idbv=@item.id">@item.title</a></h3>
+            <div class="meta">
+                <div><span class="icon-calendar"></span>@item.date</div>
+                <div><span class="icon-person"></span> Admin</div>
+            </div>
+        </div>
+    </div>
+
+}

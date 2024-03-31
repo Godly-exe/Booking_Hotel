@@ -1,0 +1,92 @@
+﻿@model Booking_Hotel.Models.data.rent
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
+}
+@section css{
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+}
+<div class="card invoice">
+    <div class="card-header p-4 p-md-5 border-bottom-0 bg-gradient-primary-to-secondary text-white-50">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-12 col-lg-auto mb-5 mb-lg-0 text-center text-lg-start">
+                <!-- Invoice branding-->
+                <img class="invoice-brand-img rounded-circle mb-4" src="~/Content/images/avt.png" alt="">
+                <div class="h2 text-white mb-0">@Model.name</div><i class="fas fa-envelope">:</i>
+                @Model.mail
+            </div>
+            <div class="col-12 col-lg-auto text-center text-lg-end">
+                <!-- Invoice details-->
+                <div class="h3 text-white"><small><i class="fas fa-phone-volume">:</i></small>@Model.phone</div>
+                <input type="number" id="madonthue" value="@Model.id_rent" hidden />
+                #@Model.id_rent
+                <br>
+                <i class="fas fa-clock">: </i> @Model.date
+            </div>
+        </div>
+    </div>
+    @Html.Action("rentsDetail", "Rents")
+    <div class="card-footer p-4 p-lg-5 border-top-0">
+        <div class="row">
+            <div class="col-lg-10">
+                <!-- Invoice - additional notes-->
+                <div class=" text-uppercase fw-700 mb-2" style="color:red">Ghi chú</div>
+                <div class="font-weight-bold mb-0">@Model.note</div>
+            </div><br />
+            <div class="col-lg-10">
+                <br />
+                <button class="btn btn-outline-secondary me-5" onclick="location.href='@Url.Action("Index", "Rents")'" type="button">Trở về</button>
+                @if (@Model.bills.Where(i => i.id_rent == Model.id_rent).Count() == 0)
+                {
+                    <button class="btn btn-outline-primary me-5 " id="time_start" type="button">Bắt đầu tính giờ</button>
+                }
+                else
+                {
+                    <button class="btn btn-outline-primary me-5 " title="@Model.bills.Where(i=>i.id_rent == Model.id_rent).Select(j=>j.date_start).First()" id="time_start" type="button">Bắt đầu tính giờ</button>
+                    <button class="btn btn-outline-danger me-5 " id="time_end" onclick="location.href='@Url.Action("rent_end", "Rents",new {id=Model.id_rent})'" type="button">Kết thúc tính giờ, xuất hoá đơn</button>
+                    if (Model.bills.Where(i => i.id_rent == Model.id_rent).Select(j => j.date_end).First() != null)
+                    {
+                        <button class="btn btn-outline-danger" id="time_end" type="button"><a href="#viewBill" style="text-decoration:none" data-toggle="modal">Xem hoá đơn</a></button>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    @if (@Model.bills.Where(i => i.id_rent == Model.id_rent).Count() != 0)
+    {<div id="viewBill" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="row justify-content-center">
+                        @Html.Action("ViewBill", "Rents", new { id = Model.id_rent })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+@section scripts{
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#time_start").click(function () {
+                _id = $("#madonthue").val();
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("rent_start","rents")",
+                        data: { id: _id },
+                        success: function (data) {
+                            if (data.status) {
+                                alert("Bắt đầu tính giờ thành công");
+                            }
+                            else {
+                                alert("Giờ đã được bắt đầu tính trước đó!!!");
+                            }
+                        }
+                    });
+            })
+        })
+    </script>
+}

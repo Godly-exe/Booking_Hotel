@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "AllMail";
+    Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
+}
+<h1 class="h3 mb-2 text-gray-800">Thư</h1>
+
+@foreach (var item in Model)
+{
+    if (item.IsRead == false)
+    {
+        <div class="row" style="display: inherit;">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between alert-success">
+                    <h6 class="m-0 font-weight-bold text-primary ">@item.Name</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fab fa-squarespace fa-lg fa-fw "></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Tuỳ chọn:</div>
+                            <a class="dropdown-item" href="@Url.Action("MailDetail", new {id = item.ContactId})">Chi tiết</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" onMouseOver="this.style.color='red'" onMouseOut="this.style.color='#858796'" href="@Url.Action("DeleteMail","Home",new { id = item.ContactId })" onclick="return confirm('Bạn có chắc chắn muốn xoá?');">Xoá</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class=" an" style=" margin: 1.2rem;">
+                    @item.Message
+                </div>
+            </div>
+        </div>
+
+    }
+    else
+    {
+        <div class="row" style="display: inherit;">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary ">@item.Name</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fab fa-squarespace fa-lg fa-fw "></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Tuỳ chọn:</div>
+                            <a class="dropdown-item" href="@Url.Action("MailDetail", new {id = item.ContactId})">Chi tiết</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" onMouseOver="this.style.color='red'" onMouseOut="this.style.color='#858796'" href="@Url.Action("DeleteMail","Home",new { id = item.ContactId })" onclick="return confirm('Bạn có chắc chắn muốn xoá?');">Xoá</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class=" an" style=" margin: 1.2rem;">
+                    @item.Message
+                </div>
+            </div>
+        </div>
+
+    }
+}
+

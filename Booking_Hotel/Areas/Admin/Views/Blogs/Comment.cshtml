@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Booking_Hotel.Models.data.comment>
+@{
+    ViewBag.Title = "Comment";
+    Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
+}
+@section css{
+    <link href="~/Content/Admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Quản lý bình luận</h1>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                Chọn bài viết
+            </h6>
+            @using (Html.BeginForm("Comment", "blogs", FormMethod.Post))
+            {
+                <div class="timkiemm">
+                    @Html.DropDownList("Blogg", null, "All", new { @class = "luachon", @style = "width:40vw" })
+                    <input type="submit" class="btn btn-secondary py-3 px-4 " value="Xác nhận" />
+                </div>
+            }
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên</th>
+                            <th>Nội dung</th>
+                            <th>Bài viết</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên</th>
+                            <th>Nội dung</th>
+                            <th>Bài viết</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @{var i = 1; }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td>
+                                    @item.name
+                                </td>
+                                <td>
+                                    @item.comment_content
+                                </td>
+                                <td>
+                                    @item.blog.title
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("DeleteComment","blogs", new { id = item.id_cmt })" onclick="return confirm('Bạn có chắc chắn muốn xoá?');" class="btn btn-danger btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-trash"></i>
+                                        </span>
+                                        <span class="text">Xoá bình luận</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+@section scripts{
+    <script src="~/Content/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/Content/Admin/js/demo/datatables-demo.js"></script>
+}

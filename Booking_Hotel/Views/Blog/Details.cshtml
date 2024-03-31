@@ -1,0 +1,113 @@
+﻿@model Booking_Hotel.Models.data.blog
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('../Content/images/blog.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs"><span class="mr-2"><a href="~/Home">Trang Chủ <i class="ion-ios-arrow-forward"></i></a></span> <span class="mr-2"><a href="blog.html">Bài viết <i class="ion-ios-arrow-forward"></i></a></span> </p>
+                <h1 class="mb-3 bread">Bài viết của chúng tôi</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section ftco-degree-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ftco-animate">
+
+                <h2 class="mb-3">@Model.head</h2>
+
+                <div style="text-align: justify">@Html.Raw(Model.blog_content)</div>
+
+                <div class="about-author d-flex p-4 bg-light">
+                    <div class="bio mr-5">
+                        <img src="~/Content/images/admin.png" alt="Admin" class="img-fluid mb-4">
+                    </div>
+                    <div class="desc">
+                        <h3>Admin</h3>
+                        <p>
+                            Đội ngũ Admin luôn nỗ lực, tìm hiểu, xác minh thông tin để đưa đến cho bạn đọc những bài viết
+                            chất lượng nhất. Cảm ơn bạn đã chú ý theo dõi !!!
+                        </p>
+                    </div>
+                </div>
+                <div class="pt-5 mt-5" id="binhluan">
+                    @{ Html.RenderAction("Comment", new { id = Model.id });}
+                    <div class="comment-form-wrap pt-5">
+                        <h3 class="mb-5">Bình luận</h3>
+                        <form class="p-5 bg-light">
+                            <h1>Đánh giá sản phẩm</h1>
+                            <div>
+                                <link href="~/Content/css/style.css" rel="stylesheet" />
+                                <p>Đánh giá của bạn:</p>
+                               
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Tên *</label>
+                                <input type="text" class="form-control" value="" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea name="massage" id="message" value="" cols="10" rows="10" class="form-control" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" id="addComment" value="Bình luận" class="btn py-3 px-4 btn-primary">Bình luận</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 sidebar ftco-animate">
+                <div class="sidebar-box ftco-animate">
+                    <h3>Bài viết khác</h3>
+                    @{ Html.RenderAction("Blog_other", new { id = Model.id });}
+                </div>
+                <div class="sidebar-box ftco-animate">
+                    <h3>Hotel Hub</h3>
+                    <p>Giúp bạn đặt phòng khách sạn chất lượng với giá cả hợp lý.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section script{
+    <script src="~/Content/js/jquery-ui.js"></script>
+    <script src="~/Content/js/contact_custom.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#addComment").click(function () {
+                if ($("#name").val() != "" && $("#message").val() != "") {
+                    _id = @Model.id;
+                    _name = $("#name").val();
+                    _message = $("#message").val();
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("AddComment","Blog")",
+                        data: { id: _id, name: _name, comment: _message },
+                        success: function (data) {
+                            if (data.status) {
+                                window.location.reload();
+                            }
+                        }
+                    });
+                } else {
+                    alert("Vui lòng nhập thông tin!!");
+                }
+
+
+            })
+
+        })
+       
+    </script>
+
+}

@@ -1,0 +1,49 @@
+﻿@model Booking_Hotel.Models.data.bill
+
+@if (Model.status != null)
+{
+    var item = (TimeSpan)(Model.date_end - Model.date_start);
+    var day = item.Days;
+    var hour = item.Hours;
+    var tong = (day * 10 + hour) * Model.money_day;
+
+
+    <div class="col-xxl-6 col-xl-8">
+        <br /><br />
+        <h3 class="text-primary">Hoá đơn đơn thuê</h3>
+        <div class="row ">
+            <div class="col text-black-75"><i>Mã hoá đơn:</i></div>
+            <div class="col text-red" style="font-size:20px">@Model.id_bill</div>
+        </div>
+        <div class="row ">
+            <div class="col text-black-75"><i>Mã đơn:</i></div>
+            <div class="col text-red" style="font-size:20px">@Model.id_rent</div>
+        </div>
+        <div class="row ">
+            <div class="col text-black-75"><i>Giờ bắt đầu:</i></div>
+            <div class="col text-red" style="font-size:15px">@Model.date_start</div>
+        </div>
+        <div class="row ">
+            <div class="col text-black-75"><i>Giờ kết thúc:</i></div>
+            <div class="col text-red" style="font-size:15px">@Model.date_end</div>
+        </div>
+        <div class="row ">
+            <div class="col text-black-75"><i>Số giờ sử dụng:</i></div>
+            <div class="col text-red" style="font-size:20px">@day Ngày, @hour Giờ </div>
+        </div>
+        <div class="row ">
+            <div class="col text-black-75"><i>Giá / giờ:</i></div>
+            <div class="col text-red" style="font-size:20px">@Model.money_day<small> VNĐ</small></div>
+        </div>
+        <div class="row ">
+            <div class="col text-black-75"><i>Tổng tiền:</i></div>
+            <div class="col text-red" style="font-size:20px">@tong<small> VNĐ</small></div>
+        </div>
+        <hr class="my-4"><br /><br />
+    </div>
+}
+else
+{
+    <h3>Đơn thuê chưa hoàn thành</h3>
+}
+

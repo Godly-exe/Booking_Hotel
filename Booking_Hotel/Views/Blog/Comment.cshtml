@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Booking_Hotel.Models.data.comment>
+<h3 class="mb-5">@ViewBag.count bình luận</h3>
+<ul class="comment-list">
+    @foreach (var item in Model)
+    {
+        <li class="comment">
+            <div class="vcard bio">
+                <img src="~/Content/images/user.png" alt="Ảnh">
+            </div>
+            <div class="comment-body">
+                <h3>@item.name</h3>
+                <div class="meta">@item.date.Value.ToString("dd/MM/yyyy")</div>
+                <p>@item.comment_content</p>
+            </div>
+        </li>
+    }
+</ul>
+<!-- END comment-list -->

@@ -1,0 +1,122 @@
+﻿@model IEnumerable<Booking_Hotel.Models.data.blog>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
+}
+@section css{
+    <link href="~/Content/Admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+}
+
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Quản lý bài viết</h1>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                Các bài viết hiện tại
+            </h6>
+
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tiêu đề</th>
+                            <th>Ảnh chính</th>
+                            <th>Hiển thị</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tiêu đề</th>
+                            <th>Ảnh chính</th>
+                            <th>Hiển thị</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @{var i = 1; }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.title)
+                                </td>
+                                <td>
+                                    <img src="@Url.Content(item.image)" width="113px" height="75px" alt="Ảnh" />
+                                </td>
+                                <td>
+                                    @if (item.IsActive == true)
+                                    {
+                                        <a href="" data-id="@item.id" class="btn-custom btn btn-outline-success rounded-pill" id="fullControl"><i class="fas fa-check"></i></a>
+                                    }
+                                    else
+                                    {
+                                        <a href="" data-id="@item.id" class="btn-custom btn btn-outline-danger rounded-pill" id="fullControl"><i class="far fa-times-circle"></i></a>
+
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action( "Edit", new { id = item.id })" class="btn btn-warning btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </span>
+                                        <span class="text">Sửa</span>
+                                    </a>
+                                    <a href="@Url.Action("DeleteConfirmed","blogs", new { id = item.id })" onclick="return confirm('Bạn có chắc chắn muốn xoá?');" class="btn btn-danger btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-trash"></i>
+                                        </span>
+                                        <span class="text">Xoá</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+@section scripts{
+    <script src="~/Content/Admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/Admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Content/Admin/js/demo/datatables-demo.js"></script>
+    <script src="~/Content/js/jquery-ui.js"></script>
+    <script src="~/Content/js/contact_custom.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".btn-custom").off('click').on('click', function (e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                $.ajax({
+                    url: "/Admin/blogs/changeView",
+                    data: { id: id },
+                    type: "POST",
+                    success: function (data) {
+                        if (data.status) {
+                            window.location.reload();
+                        }
+                        else {
+                            window.location.reload();
+                        }
+                    }
+                });
+            })
+
+        })
+    </script>
+}
+}

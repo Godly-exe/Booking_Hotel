@@ -1,0 +1,21 @@
+﻿@model Booking_Hotel.Models.data.employee
+@{
+    ViewBag.Title = "Rename";
+    Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
+}
+
+<div class="card mb-4">
+    <div class="card-header" style="color: #0061f2"><b>Đổi tên</b></div>
+    <div class="card-body">
+            @using (Html.BeginForm("rename","employees",FormMethod.Post))
+            {
+                <div class="mb-3">
+                    <label class="small mb-1" for="confirmPassword">Nhập tên mới...</label>
+                    <input type="number" hidden name="id" value="@Model.id_employee" />
+                    <input class="form-control" required name="namenew" type="text" placeholder="Nhập tên bạn muốn đổi ở đây...">
+                </div>
+                <button class="btn btn-primary" type="submit">Xác nhận</button>
+            }
+    </div>
+</div>
+

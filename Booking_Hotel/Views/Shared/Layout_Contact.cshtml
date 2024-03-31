@@ -1,0 +1,11 @@
+﻿@foreach (var item in Model)
+{
+    <ul>
+        <li><span class="icon icon-map-marker"></span><span class="text">@item.address</span></li>
+        <li><a href="tel://@item.phone"><span class="icon icon-phone"></span><span class="text">@item.phone</span></a></li>
+        <li><a href="mailto:@item.email"><span class="icon icon-envelope"></span><span class="text">@item.email</span></a></li>
+        <li><a href="@item.facebook_link"><span class="icon icon-facebook-f"></span><span class="text">Booking Hotel</span></a></li>
+
+    </ul>
+
+}

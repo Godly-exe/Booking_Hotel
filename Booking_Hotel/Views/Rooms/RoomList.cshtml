@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Booking_Hotel.Models.data.room>
+
+@foreach (var item in Model)
+{
+    <div class="item">
+        <div class="car-wrap rounded ftco-animate">
+            <div class="img rounded d-flex align-items-end" style="background-image: url(@item.image);">
+            </div>
+            <div class="text">
+                <h2 class="mb-0"><a href="#">@item.name</a></h2>
+                <div class="d-flex mb-3">
+                    <span class="cat">@item.types.type1</span>
+                    <p class="price ml-auto">@item.price <span>/giờ</span></p>
+                </div>
+                <p class="d-flex mb-0 d-block"><a href="@Url.Action("AddCart", "Cart", new {id =  item.id_room})" class="btn btn-primary py-2 mr-1">Thêm vào giỏ</a> @Html.ActionLink("Chi tiết", "Details", new { idx = item.id_room }, new { @class = "btn btn-secondary py-2 ml-1" })</p>
+            </div>
+        </div>
+    </div>
+}

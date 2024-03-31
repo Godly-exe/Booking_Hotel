@@ -1,0 +1,64 @@
+﻿@model Booking_Hotel.Models.data.type
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
+}
+
+<h2>Sửa thông tin</h2>
+
+@using (Html.BeginForm("Edit", "types", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Khách Sạn</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id_type)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Khách Sạn</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.type1, new { htmlAttributes = new { @class = "form-control", @data_val = "true", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.type1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+              
+        <div class="form-group">
+            <label class="control-label col-md-2">Giá theo ngày</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.price_day, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.price_day, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Ảnh(<small>Ảnh sẽ được giữ nguyên nếu không up ảnh mới</small>)</label>
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
+                    <img src="@Url.Content(Model.image)" width="113px" height="75px" alt="Ảnh" />*@
+                <input type="file" name="Image" id="Image">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">Xác nhận</span>
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Trở về", "Index")
+</div>

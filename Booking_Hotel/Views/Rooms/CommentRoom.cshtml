@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Booking_Hotel.Models.data.Comment_Room>
+<h3 class="mb-5">@ViewBag.room bình luận</h3>
+<p>Số lượt đánh giá: <span id="totalRating">0</span></p>
+<p>Điểm trung bình: <span id="averageRating">0</span></p>
+<ul class="comment-list">
+    @foreach (var item in Model)
+    {
+        <li class="comment">
+            <div class="vcard bio">
+                <img src="~/Content/images/user.png" alt="Ảnh">
+            </div>
+            <div class="comment-body">
+                <h3>@item.name_cmt</h3>
+                <div class="meta">@item.date_cmt.Value.ToString("dd/MM/yyyy")</div>
+                <p>@item.cmt_room</p>
+            </div>
+        </li>
+    }
+</ul>
+<!-- END comment-list -->

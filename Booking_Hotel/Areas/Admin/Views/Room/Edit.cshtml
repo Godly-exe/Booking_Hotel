@@ -1,0 +1,124 @@
+﻿@model Booking_Hotel.Models.data.room
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
+}
+ssss
+<h2>Sửa thông tin</h2>
+
+@using (Html.BeginForm("Edit", "Room", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Phòng</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id_room)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Tên phòng</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Giá</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Tên phòng</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.id_type, (IEnumerable<SelectListItem>)ViewBag.id_room, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_type, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Hiển thị</label>
+            <div class="col-md-10">
+                                        <div class="checkbox">
+                        @Html.EditorFor(model => model.IsActive)
+                        @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                    </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Nổi bật</label>
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.IsHot)
+                    @Html.ValidationMessageFor(model => model.IsHot, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Mô tả</label>
+            <div class="col-md-10">
+                <textarea class="form-control text-box single-line" id="describe" name="describe">@Model.describe</textarea>
+                @Html.ValidationMessageFor(model => model.describe, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Giường</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.bed, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.bed, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Kích thước</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.size, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.size, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">View Room</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.view_room, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.view_room, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Ảnh(<small>Ảnh sẽ được giữ nguyên nếu không up ảnh mới</small>)</label>
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
+                    <img src="@Url.Content(Model.image)" width="113px" height="75px" alt="Ảnh" />*@
+                <input type="file" name="Image" id="Image">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">Xác nhận</span>
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Trở về", "Index")
+</div>

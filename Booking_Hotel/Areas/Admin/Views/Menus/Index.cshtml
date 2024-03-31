@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Booking_Hotel.Models.data.menu>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
+}
+
+<h2>Quản lý menu</h2>
+
+<p>
+    <a href="@Url.Action("Create","menus")" class="btn btn-success btn-circle">
+        <i class="fas fa-plus"></i>
+    </a> Thêm mới
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.link)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.link)
+            </td>
+            <td>
+                @if (item.IsActive == true)
+                {
+                    <a href="" data-id="@item.id" class="btn-custom btn btn-outline-success rounded-pill" id="fullControl"><i class="fas fa-check"></i></a>
+                }
+                else
+                {
+                    <a href="" data-id="@item.id" class="btn-custom btn btn-outline-danger rounded-pill" id="fullControl"><i class="far fa-times-circle"></i></a>
+
+                }
+            </td>
+            <td>
+                <a href="@Url.Action( "Edit", new { id = item.id })" class="btn btn-warning btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </span>
+                    <span class="text">Sửa</span>
+                </a>
+                <a href="@Url.Action("DeleteConfirmed","menus", new { id = item.id })" onclick="return confirm('Bạn có chắc chắn muốn xoá?');" class="btn btn-danger btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-trash"></i>
+                    </span>
+                    <span class="text">Xoá</span>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $(".btn-custom").off('click').on('click', function (e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                $.ajax({
+                    url: "/Admin/menus/changeView",
+                    data: { id: id },
+                    type: "POST",
+                    success: function (data) {
+                        if (data.status) {
+                            window.location.reload();
+                        }
+                        else {
+                            window.location.reload();
+                        }
+                    }
+                });
+            })
+
+        })
+    </script>
+}

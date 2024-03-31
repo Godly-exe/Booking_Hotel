@@ -1,0 +1,38 @@
+﻿@foreach (var item in Model)
+{
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <div class="border w-100 p-4 rounded mb-2 d-flex">
+                <div class="icon mr-3">
+                    <span class="icon-map-o"></span>
+                </div>
+                <p><span>Địa chỉ:</span> @item.address</p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="border w-100 p-4 rounded mb-2 d-flex">
+                <div class="icon mr-3">
+                    <span class="icon-mobile-phone"></span>
+                </div>
+                <p><span>Điện thoại:</span> <a href="tel://@item.phone">@item.phone</a></p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="border w-100 p-4 rounded mb-2 d-flex">
+                <div class="icon mr-3">
+                    <span class="icon-envelope-o"></span>
+                </div>
+                <p><span>Email:</span> <a href="mailto:@item.email">@item.email</a></p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="border w-100 p-4 rounded mb-2 d-flex">
+                <div class="icon mr-3">
+                    <span class="icon-facebook"></span>
+                </div>
+                <p><span>FaceBook:</span> <a href="@item.facebook_link">Hotel Hub</a></p>
+            </div>
+        </div>
+    </div>
+}
+
